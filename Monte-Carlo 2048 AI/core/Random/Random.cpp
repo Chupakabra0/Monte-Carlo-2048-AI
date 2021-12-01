@@ -9,6 +9,6 @@
 }
 
 [[nodiscard]] int Random::GetNextInt(int low, int high) {
-    std::uniform_int_distribution<int> roll(low, high);
+    std::uniform_int_distribution<int> roll(low, high - 1);
     return roll(this->randomGenerator);
 }

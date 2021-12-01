@@ -1,9 +1,12 @@
 #pragma once
+#include <ctime>
 #include <random>
 
 class Random {
 public:
-    explicit Random() = default;
+    explicit Random() : randomGenerator(time(nullptr)) {
+
+    }
 
     Random(const Random&) = default;
 
