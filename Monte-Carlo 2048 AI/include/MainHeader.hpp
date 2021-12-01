@@ -13,6 +13,7 @@
 #include <SFML/Graphics.hpp>
 
 #include "const/Const.hpp"
+#include "Game/Game.hpp"
 
 using namespace std;
 using namespace sf;
