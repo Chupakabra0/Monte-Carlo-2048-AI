@@ -12,8 +12,11 @@
 
 #include <SFML/Graphics.hpp>
 
+#include <fmt/format.h>
+
 #include "const/Const.hpp"
 #include "Game/Game.hpp"
+#include "utils/Utils.hpp"
 
 using namespace std;
 using namespace sf;

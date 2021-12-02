@@ -3,6 +3,20 @@
 
 using namespace std;
 
+[[nodiscard]] int Game::GetElement(int row, int column) const {
+    return this->field[row][column];
+}
+
+void Game::MakeMove(Move move) {
+    // shift
+
+    // add similar tiles
+
+    // shift
+
+    // spawn new tile if the game is not over
+}
+
 void Game::InitBools() {
     this->isChanged  = false;
     this->isWin     = false;
@@ -36,6 +50,7 @@ void Game::AddStartingElement() {
         } while (this->field[row][column] != 0);
 
         // TODO: 25% chance to add 4
-        this->field[row][column] = 2;
+        this->addElement->AddElement(this->field[row][column]);
+        //this->field[row][column] = 2048;
     }
 }

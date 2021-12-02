@@ -152,11 +152,15 @@
     <ClCompile Include="src\Source.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="core\AddElementStrategy\Add2048Strategy.hpp" />
+    <ClInclude Include="core\AddElementStrategy\Add2Strategy.hpp" />
+    <ClInclude Include="core\AddElementStrategy\IAddElementStrategy.hpp" />
     <ClInclude Include="core\Game\Game.hpp" />
     <ClInclude Include="include\argparse\argparse.hpp" />
     <ClInclude Include="include\const\Const.hpp" />
     <ClInclude Include="include\MainHeader.hpp" />
     <ClInclude Include="core\Random\Random.hpp" />
+    <ClInclude Include="include\utils\Utils.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

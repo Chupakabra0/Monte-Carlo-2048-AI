@@ -2,10 +2,12 @@
 #include "const/Const.hpp"
 
 #include <array>
+#include "AddElementStrategy/Add2Strategy.hpp"
+#include "Game/Move.hpp"
 
 class Game {
 public:
-    explicit Game() {
+    explicit Game() : addElement(new Add2Strategy) {
         this->InitBools();
         this->InitElements();
         this->InitScore();
@@ -15,9 +17,9 @@ public:
 
     Game(Game&&) noexcept = default;
 
-    [[nodiscard]] std::array<std::array<int, FIELD_SIZE>, FIELD_SIZE> GetField() const {
-        return this->field;
-    }
+    [[nodiscard]] int GetElement(int row, int column) const;
+
+    void MakeMove(Move move);
 
 private:
     bool isPlaying;
@@ -26,6 +28,8 @@ private:
 
     int score;
     int elementsCount;
+
+    std::unique_ptr<IAddElementStrategy> addElement;
 
     std::array<std::array<int, FIELD_SIZE>, FIELD_SIZE> field;
 
