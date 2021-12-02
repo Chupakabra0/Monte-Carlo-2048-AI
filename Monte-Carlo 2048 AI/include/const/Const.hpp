@@ -14,6 +14,7 @@ static constexpr auto START_COUNT = 2;
 
 static constexpr auto TILE_SIZE    = WINDOW_WIDTH / FIELD_SIZE;
 static constexpr auto TILE_PADDING = 5;
+static constexpr auto WIN_VALUE    = 2048;
 
 static constexpr auto TILE_COLORS_SIZE = 11;
 static const std::array<sf::Color, TILE_COLORS_SIZE> TILE_COLORS = {
@@ -30,10 +31,10 @@ static const std::array<sf::Color, TILE_COLORS_SIZE> TILE_COLORS = {
     sf::Color(244, 198, 42)
 };
 
-static const std::map<Move, sf::Vector2f> MOVES = {
-    std::make_pair(Move::DOWN, sf::Vector2f(0, 1)),
-    std::make_pair(Move::LEFT, sf::Vector2f(-1, 0)),
-    std::make_pair(Move::RIGHT, sf::Vector2f(1, 0)),
-    std::make_pair(Move::UP, sf::Vector2f(0, -1)),
-    std::make_pair(Move::NO, sf::Vector2f(0, 0))
+static const std::map<Move, sf::Vector2i> MOVES = {
+    std::make_pair(Move::DOWN, sf::Vector2i(0, 1)),
+    std::make_pair(Move::LEFT, sf::Vector2i(-1, 0)),
+    std::make_pair(Move::RIGHT, sf::Vector2i(1, 0)),
+    std::make_pair(Move::UP, sf::Vector2i(0, -1)),
+    std::make_pair(Move::NO, sf::Vector2i(0, 0))
 };

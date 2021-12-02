@@ -157,6 +157,8 @@
     <ClInclude Include="core\AddElementStrategy\IAddElementStrategy.hpp" />
     <ClInclude Include="core\Game\Game.hpp" />
     <ClInclude Include="core\Game\Move.hpp" />
+    <ClInclude Include="core\GetMoveStrategy\IGetMoveStrategy.hpp" />
+    <ClInclude Include="core\GetMoveStrategy\KeyboardGetMoveStrategy.hpp" />
     <ClInclude Include="include\argparse\argparse.hpp" />
     <ClInclude Include="include\const\Const.hpp" />
     <ClInclude Include="include\MainHeader.hpp" />

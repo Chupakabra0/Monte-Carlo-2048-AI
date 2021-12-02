@@ -2,8 +2,8 @@
 
 int main(const int argc, char* argv[]) {
 
-    auto window = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
-    auto game   = make_unique<Game>();
+    auto window  = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
+    auto game    = make_unique<Game>();
 
     //--------------------- GAME STUFF INIT --------------------//
 
@@ -23,29 +23,7 @@ int main(const int argc, char* argv[]) {
                 window->close();
             }
 
-            auto gameMove = Move::NO;
-            // TODO: add get-move strategy
-            switch (e.key.code) {
-                case Keyboard::Up: {
-                    gameMove = Move::UP;
-                    break;
-                }
-                case Keyboard::Down: {
-                    gameMove = Move::DOWN;
-                    break;
-                }
-                case Keyboard::Left: {
-                    gameMove = Move::LEFT;
-                    break;
-                }
-                case Keyboard::Right: {
-                    gameMove = Move::RIGHT;
-                    break;
-                }
-                default: {
-                    break;
-                }
-            }
+            auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove();
 
             game->MakeMove(gameMove);
         }
@@ -90,9 +68,9 @@ int main(const int argc, char* argv[]) {
 
                     //---------------- DRAW TILE FONT ----------------//
 
+                    text->setPosition(tile->getPosition());
                     text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
                         text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
-                    text->setPosition(tile->getPosition());
                     
                     if (element <= 4) {
                         text->setFillColor(Color(121, 112, 100));
@@ -106,6 +84,35 @@ int main(const int argc, char* argv[]) {
 
                 }
             }
+        }
+
+        if (game->IsWin()) {
+            tile->setOrigin(0, 0);
+            tile->setSize(Vector2f(WINDOW_WIDTH, WINDOW_WIDTH));
+            tile->setPosition(Vector2f(0, WINDOW_MARGIN));
+            tile->setFillColor(Color(255, 255, 0, 100));
+            window->draw(*tile);
+
+            text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
+                text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
+            text->setPosition(Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_WIDTH / 2.0f + WINDOW_MARGIN));
+            text->setFillColor(Color::White);
+            text->setString("YOU WIN!!!");
+            window->draw(*text);
+        }
+        else if (!game->IsPlaying()) {
+            tile->setOrigin(0, 0);
+            tile->setSize(Vector2f(WINDOW_WIDTH, WINDOW_WIDTH));
+            tile->setPosition(Vector2f(0, WINDOW_MARGIN));
+            tile->setFillColor(Color(255, 255, 255, 100));
+            window->draw(*tile);
+
+            text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
+                text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
+            text->setPosition(Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_WIDTH / 2.0f + WINDOW_MARGIN));
+            text->setFillColor(Color(121, 112, 100));
+            text->setString("Game over");
+            window->draw(*text);
         }
 
         window->display();

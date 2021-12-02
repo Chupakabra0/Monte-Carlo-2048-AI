@@ -17,6 +17,7 @@
 #include "const/Const.hpp"
 #include "Game/Game.hpp"
 #include "utils/Utils.hpp"
+#include "GetMoveStrategy/KeyboardGetMoveStrategy.hpp"
 
 using namespace std;
 using namespace sf;

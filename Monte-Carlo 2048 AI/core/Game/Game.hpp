@@ -9,8 +9,8 @@ class Game {
 public:
     explicit Game() : addElement(new Add2Strategy) {
         this->InitBools();
-        this->InitElements();
         this->InitScore();
+        this->InitElements();
     }
 
     Game(const Game&) = default;
@@ -18,6 +18,8 @@ public:
     Game(Game&&) noexcept = default;
 
     [[nodiscard]] int GetElement(int row, int column) const;
+    [[nodiscard]] bool IsWin() const;
+    [[nodiscard]] bool IsPlaying() const;
 
     void MakeMove(Move move);
 
@@ -26,8 +28,8 @@ private:
     bool isWin;
     bool isChanged;
 
-    int score;
-    int elementsCount;
+    int score{};
+    int elementsCount{};
 
     std::unique_ptr<IAddElementStrategy> addElement;
 
@@ -41,5 +43,10 @@ private:
 
     //--------------------- GAME ------------------------//
 
-    void AddStartingElement();
+    //void AddStartingElement();
+    void AddElement();
+    void DirMove(const sf::Vector2i& direction);
+    void Shift(const sf::Vector2i& direction);
+    void UniteSimilarTiles(const sf::Vector2i& direction);
+    bool CheckLose();
 };
