@@ -1,5 +1,5 @@
 #pragma once
 
 enum class Move : short {
-    LEFT = 0, UP, RIGHT, DOWN
+    NO = 0, LEFT, UP, RIGHT, DOWN
 };

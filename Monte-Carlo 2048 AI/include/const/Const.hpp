@@ -34,5 +34,6 @@ static const std::map<Move, sf::Vector2f> MOVES = {
     std::make_pair(Move::DOWN, sf::Vector2f(0, 1)),
     std::make_pair(Move::LEFT, sf::Vector2f(-1, 0)),
     std::make_pair(Move::RIGHT, sf::Vector2f(1, 0)),
-    std::make_pair(Move::UP, sf::Vector2f(0, -1))
+    std::make_pair(Move::UP, sf::Vector2f(0, -1)),
+    std::make_pair(Move::NO, sf::Vector2f(0, 0))
 };

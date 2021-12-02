@@ -53,6 +53,9 @@
     <ClInclude Include="core\AddElementStrategy\Add2048Strategy.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="core\Game\Move.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

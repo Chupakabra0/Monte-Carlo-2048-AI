@@ -23,23 +23,23 @@ int main(const int argc, char* argv[]) {
                 window->close();
             }
 
-            Move move;
+            auto gameMove = Move::NO;
             // TODO: add get-move strategy
             switch (e.key.code) {
                 case Keyboard::Up: {
-                    move = Move::UP;
+                    gameMove = Move::UP;
                     break;
                 }
                 case Keyboard::Down: {
-                    move = Move::DOWN;
+                    gameMove = Move::DOWN;
                     break;
                 }
                 case Keyboard::Left: {
-                    move = Move::LEFT;
+                    gameMove = Move::LEFT;
                     break;
                 }
                 case Keyboard::Right: {
-                    move = Move::RIGHT;
+                    gameMove = Move::RIGHT;
                     break;
                 }
                 default: {
@@ -47,7 +47,7 @@ int main(const int argc, char* argv[]) {
                 }
             }
 
-            game->MakeMove(move);
+            game->MakeMove(gameMove);
         }
 
         window->clear(Color(250, 248, 239));
