@@ -2,12 +2,13 @@
 #include "const/Const.hpp"
 
 #include <array>
+#include "AddElementStrategy/Add2Or4Strategy.hpp"
 #include "AddElementStrategy/Add2Strategy.hpp"
 #include "Game/Move.hpp"
 
 class Game {
 public:
-    explicit Game() : addElement(new Add2Strategy) {
+    explicit Game() : addElement(new Add2Or4Strategy) {
         this->InitBools();
         this->InitScore();
         this->InitElements();
@@ -19,7 +20,9 @@ public:
 
     [[nodiscard]] int GetElement(int row, int column) const;
     [[nodiscard]] int GetScore() const;
+
     [[nodiscard]] bool IsPlaying() const;
+    [[nodiscard]] bool IsChanged() const;
 
     void MakeMove(Move move);
 

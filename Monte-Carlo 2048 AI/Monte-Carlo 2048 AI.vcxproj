@@ -153,6 +153,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="core\AddElementStrategy\Add2048Strategy.hpp" />
+    <ClInclude Include="core\AddElementStrategy\Add2Or4Strategy.hpp" />
     <ClInclude Include="core\AddElementStrategy\Add2Strategy.hpp" />
     <ClInclude Include="core\AddElementStrategy\IAddElementStrategy.hpp" />
     <ClInclude Include="core\Game\Game.hpp" />
