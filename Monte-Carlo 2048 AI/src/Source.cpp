@@ -11,9 +11,6 @@ int main(const int argc, char* argv[]) {
 
     auto font = make_unique<Font>();
     font->loadFromFile("resources/fonts/ClearSans-Regular.ttf");
-
-    auto text = make_unique<Text>("Test", *font);
-    text->setStyle(Text::Bold);
     
     //--------------------- GAME LOOP --------------------//
     while (window->isOpen()) {
@@ -61,16 +58,18 @@ int main(const int argc, char* argv[]) {
                     //---------------- DRAW TILE SQUARE ----------------//
                     
                     tile->setSize(Vector2f(TILE_SIZE - 2 * TILE_PADDING, TILE_SIZE - 2 * TILE_PADDING));
-                    tile->setOrigin(tile->getSize() / 2.0f);
-                    tile->setPosition(Vector2f(j * TILE_SIZE + TILE_SIZE / 2.0f, i * TILE_SIZE + TILE_SIZE / 2.0f + WINDOW_MARGIN));
+                    tile->setOrigin(tile->getSize() / 2.f);
+                    tile->setPosition(Vector2f(j * TILE_SIZE + TILE_SIZE / 2.f, i * TILE_SIZE + TILE_SIZE / 2.f + WINDOW_MARGIN));
                     tile->setFillColor(GetTileColor(element));
                     window->draw(*tile);
 
                     //---------------- DRAW TILE FONT ----------------//
 
+                    auto text = make_unique<Text>(fmt::format("{}", element), *font);
+                    text->setStyle(Text::Bold);
                     text->setPosition(tile->getPosition());
-                    text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
-                        text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
+                    text->setOrigin(Vector2f(text->getLocalBounds().width / 2.f + text->getLocalBounds().left,
+                        text->getLocalBounds().height / 2.f + text->getLocalBounds().top));
                     
                     if (element <= 4) {
                         text->setFillColor(Color(121, 112, 100));
@@ -78,7 +77,6 @@ int main(const int argc, char* argv[]) {
                     else {
                         text->setFillColor(Color::White);
                     }
-                    text->setString(fmt::format("{}", element));
                     window->draw(*text);
 
 
@@ -86,33 +84,32 @@ int main(const int argc, char* argv[]) {
             }
         }
 
-        if (game->IsWin()) {
-            tile->setOrigin(0, 0);
-            tile->setSize(Vector2f(WINDOW_WIDTH, WINDOW_WIDTH));
-            tile->setPosition(Vector2f(0, WINDOW_MARGIN));
-            tile->setFillColor(Color(255, 255, 0, 100));
-            window->draw(*tile);
+        //---------------- DRAW SCORE TEXT ----------------//
 
-            text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
-                text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
-            text->setPosition(Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_WIDTH / 2.0f + WINDOW_MARGIN));
-            text->setFillColor(Color::White);
-            text->setString("YOU WIN!!!");
-            window->draw(*text);
-        }
-        else if (!game->IsPlaying()) {
+        auto scoreText = make_unique<Text>(fmt::format("SCORE: {}", game->GetScore()), *font);
+        scoreText->setStyle(Text::Bold);
+        scoreText->setOrigin(Vector2f(scoreText->getLocalBounds().width / 2.f + scoreText->getLocalBounds().left,
+            scoreText->getLocalBounds().height / 2.f + scoreText->getLocalBounds().top));
+        scoreText->setPosition(Vector2f(WINDOW_WIDTH / 2.f, WINDOW_WIDTH / 6.f));
+        scoreText->setFillColor(Color(121, 112, 100));
+        window->draw(*scoreText);
+
+        //---------------- DRAW LOSE TEXT ----------------//
+
+        if (!game->IsPlaying()) {
             tile->setOrigin(0, 0);
             tile->setSize(Vector2f(WINDOW_WIDTH, WINDOW_WIDTH));
             tile->setPosition(Vector2f(0, WINDOW_MARGIN));
             tile->setFillColor(Color(255, 255, 255, 100));
             window->draw(*tile);
 
-            text->setOrigin(Vector2f(text->getLocalBounds().width / 2.0f + text->getLocalBounds().left,
-                text->getLocalBounds().height / 2.0f + text->getLocalBounds().top));
-            text->setPosition(Vector2f(WINDOW_WIDTH / 2.0f, WINDOW_WIDTH / 2.0f + WINDOW_MARGIN));
-            text->setFillColor(Color(121, 112, 100));
-            text->setString("Game over");
-            window->draw(*text);
+            auto loseText = make_unique<Text>("Game over", *font);
+            loseText->setStyle(Text::Bold);
+            loseText->setOrigin(Vector2f(loseText->getLocalBounds().width / 2.f + loseText->getLocalBounds().left,
+                loseText->getLocalBounds().height / 2.f + loseText->getLocalBounds().top));
+            loseText->setPosition(Vector2f(WINDOW_WIDTH / 2.f, WINDOW_WIDTH / 2.f + WINDOW_MARGIN));
+            loseText->setFillColor(Color(121, 112, 100));
+            window->draw(*loseText);
         }
 
         window->display();

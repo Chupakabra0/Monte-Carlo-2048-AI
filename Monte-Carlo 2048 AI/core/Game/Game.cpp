@@ -9,8 +9,8 @@ using namespace sf;
     return this->field[row][column];
 }
 
-bool Game::IsWin() const {
-    return this->isWin;
+int Game::GetScore() const {
+    return this->score;
 }
 
 bool Game::IsPlaying() const {
@@ -26,7 +26,6 @@ void Game::MakeMove(Move move) {
 
 void Game::InitBools() {
     this->isChanged  = false;
-    this->isWin      = false;
     this->isPlaying  = true;
 }
 
@@ -62,44 +61,44 @@ void Game::AddElement() {
 void Game::DirMove(const sf::Vector2i& direction) {
     this->isChanged = false;
 
-    std::clog << "Before move:\n";
-    std::for_each(this->field.begin(), this->field.end(),
-        [](const auto& el) {
-            PrintArray(el.begin(), el.end(), std::clog);
-            std::clog << std::endl;
-        }
-    );
+    //std::clog << "Before move:\n";
+    //std::for_each(this->field.begin(), this->field.end(),
+    //    [](const auto& el) {
+    //        PrintArray(el.begin(), el.end(), std::clog);
+    //        std::clog << std::endl;
+    //    }
+    //);
 
     this->Shift(direction);
 
-    std::clog << "After first shift:\n";
-    std::for_each(this->field.begin(), this->field.end(),
-        [](const auto& el) {
-            PrintArray(el.begin(), el.end(), std::clog);
-            std::clog << std::endl;
-        }
-    );
+    //std::clog << "After first shift:\n";
+    //std::for_each(this->field.begin(), this->field.end(),
+    //    [](const auto& el) {
+    //        PrintArray(el.begin(), el.end(), std::clog);
+    //        std::clog << std::endl;
+    //    }
+    //);
 
     this->UniteSimilarTiles(direction);
     
-    std::clog << "After uniting:\n";
-    std::for_each(this->field.begin(), this->field.end(),
-        [](const auto& el) {
-            PrintArray(el.begin(), el.end(), std::clog);
-            std::clog << std::endl;
-        }
-    );
+    //std::clog << "After uniting:\n";
+    //std::for_each(this->field.begin(), this->field.end(),
+    //    [](const auto& el) {
+    //        PrintArray(el.begin(), el.end(), std::clog);
+    //        std::clog << std::endl;
+    //    }
+    //);
 
     this->Shift(direction);
 
-    std::clog << "After second shift (total):\n";
-    std::for_each(this->field.begin(), this->field.end(),
-        [](const auto& el) {
-            PrintArray(el.begin(), el.end(), std::clog);
-            std::clog << std::endl;
-        }
-    );
-    std::clog << std::string(35u, '-') << std::endl;
+    //std::clog << "After second shift (total):\n";
+    //std::for_each(this->field.begin(), this->field.end(),
+    //    [](const auto& el) {
+    //        PrintArray(el.begin(), el.end(), std::clog);
+    //        std::clog << std::endl;
+    //    }
+    //);
+    //std::clog << std::string(35u, '-') << std::endl;
 
     if (this->isChanged) {
         this->AddElement();
@@ -158,8 +157,7 @@ void Game::UniteSimilarTiles(const Vector2i& direction) {
                 bElement = 0;
 
                 if (aElement == WIN_VALUE) {
-                    this->isPlaying = false;
-                    this->isWin = true;
+                    //this->isPlaying = false;
                 }
 
                 this->score     += aElement;

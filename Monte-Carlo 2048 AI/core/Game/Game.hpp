@@ -18,14 +18,13 @@ public:
     Game(Game&&) noexcept = default;
 
     [[nodiscard]] int GetElement(int row, int column) const;
-    [[nodiscard]] bool IsWin() const;
+    [[nodiscard]] int GetScore() const;
     [[nodiscard]] bool IsPlaying() const;
 
     void MakeMove(Move move);
 
 private:
     bool isPlaying;
-    bool isWin;
     bool isChanged;
 
     int score{};
