@@ -17,6 +17,10 @@ bool Game::IsPlaying() const {
     return this->isPlaying;
 }
 
+bool Game::IsChanged() const {
+    return this->isChanged;
+}
+
 void Game::MakeMove(Move move) {
     if (move == Move::NO) {
         return;
