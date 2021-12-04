@@ -16,6 +16,9 @@ static constexpr auto TILE_SIZE    = WINDOW_WIDTH / FIELD_SIZE;
 static constexpr auto TILE_PADDING = 5;
 static constexpr auto WIN_VALUE    = 2048;
 
+static constexpr auto DEFAULT_SIMULATIONS_COUNT = 20;
+static constexpr auto DEFAULT_MAX_LENGTH_GAME   = 100;
+
 static constexpr auto TILE_COLORS_SIZE = 11;
 static const std::array<sf::Color, TILE_COLORS_SIZE> TILE_COLORS = {
     sf::Color(250, 231, 224),

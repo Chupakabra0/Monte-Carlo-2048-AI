@@ -4,12 +4,13 @@
 
 #include "AI2048/AI.hpp"
 #include "Random/Random.hpp"
+#include "const/Const.hpp"
 
 #include <fmt/format.h>
 
 class MonteCarloAI : public AI {
 public:
-    explicit MonteCarloAI(int simulationsCount = 20, int maxGameLength = 100)
+    explicit MonteCarloAI(int simulationsCount = DEFAULT_SIMULATIONS_COUNT, int maxGameLength = DEFAULT_MAX_LENGTH_GAME)
         : simulationsCount(simulationsCount), maxGameLength(maxGameLength) {
 
     }
@@ -21,12 +22,14 @@ public:
         const auto random = std::make_unique<Random>();
 
         auto bestMove  = moves.empty() ? Move::NO : moves.front();
-        auto bestScore = game.GetScore();
+        auto bestScore = static_cast<double>(game.GetScore());
+
+        std::clog << fmt::format("Get move started\n");
 
         for (auto i = 0; i < moves.size(); ++i) {
-            //std::clog << std::string(35, '-') << std::endl;
-            //std::clog << fmt::format("Move: {}", MoveToString(moves[i])) << std::endl;
-            auto tempScore = 0;
+            std::clog << std::string(35, '-') + "\n";
+            std::clog << fmt::format("Move: {}\n", MoveToString(moves[i]));
+            auto tempScore = 0.0;
 
             for (auto j = 0; j < this->simulationsCount; ++j) {
                 auto tempGame = game;
@@ -44,20 +47,24 @@ public:
                     }
                 }
 
-                //std::clog << fmt::format("Simulation #{}. Score: {}.", j + 1, tempGame.GetScore()) << std::endl;
+                //std::clog << fmt::format("Simulation #{}. Score: {}\n", j + 1, tempGame.GetScore());
                 tempScore += tempGame.GetScore();
             }
 
             tempScore /= this->simulationsCount;
-            //std::clog << fmt::format("Math. expect: {}", tempScore) << std::endl;
+            std::clog << fmt::format("Math. expect: {}\n", tempScore);
 
             if (tempScore >= bestScore) {
                 bestScore = tempScore;
                 bestMove  = moves[i];
             }
 
-            //std::clog << std::string(35, '-') << std::endl;
+            std::clog << std::string(35, '-') + "\n";
         }
+
+        std::clog << fmt::format("BEST MOVE: {} (score {})\n", MoveToString(bestMove), bestScore);
+        std::clog << fmt::format("Get move ended\n");
+        std::clog << std::string(35, '-') + "\n" << std::flush;
 
         return bestMove;
     }

@@ -1,10 +1,23 @@
 #include "MainHeader.hpp"
-#include <GetMoveStrategy/AIGetMoveStrategy.hpp>
 
 int main(const int argc, char* argv[]) {
 
-    auto window  = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
-    auto game    = make_unique<Game>();
+    // TODO: argparse factory method
+    auto argparser = make_unique<ArgumentParser>();
+    argparser->add_argument("-s", "--simulations")
+        .help("determines the number of games' simulations for each possible move")
+        .default_value(DEFAULT_SIMULATIONS_COUNT);
+    argparser->add_argument("-l", "--length")
+        .help("determines the maximum number of moves made during the simulation")
+        .default_value(DEFAULT_MAX_LENGTH_GAME);
+
+    argparser->parse_args(argc, argv);
+
+    const auto simulations = strtol(argparser->get<std::string>("-s").c_str(), nullptr, 10);
+    const auto length      = strtol(argparser->get<std::string>("-l").c_str(), nullptr, 10);
+
+    auto window    = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
+    auto game      = make_unique<Game>();
 
     //--------------------- GAME STUFF INIT --------------------//
 
@@ -22,11 +35,15 @@ int main(const int argc, char* argv[]) {
             }
 
             //auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove(*game);
-
         }
 
-        const auto gameMove = std::make_unique<AIGetMoveStrategy>(std::make_shared<MonteCarloAI>())->GetMove(*game);
-        game->MakeMove(gameMove);
+        if (game->IsPlaying()) {
+            const auto gameMove = std::make_unique<AIGetMoveStrategy>(
+                std::make_shared<MonteCarloAI>(simulations, length)
+            )->GetMove(*game);
+
+            game->MakeMove(gameMove);
+        }
 
         window->clear(Color(250, 248, 239));
 
