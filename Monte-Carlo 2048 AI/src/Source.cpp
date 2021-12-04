@@ -1,4 +1,5 @@
 #include "MainHeader.hpp"
+#include <GetMoveStrategy/AIGetMoveStrategy.hpp>
 
 int main(const int argc, char* argv[]) {
 
@@ -20,10 +21,12 @@ int main(const int argc, char* argv[]) {
                 window->close();
             }
 
-            auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove();
+            //auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove(*game);
 
-            game->MakeMove(gameMove);
         }
+
+        const auto gameMove = std::make_unique<AIGetMoveStrategy>(std::make_shared<MonteCarloAI>())->GetMove(*game);
+        game->MakeMove(gameMove);
 
         window->clear(Color(250, 248, 239));
 

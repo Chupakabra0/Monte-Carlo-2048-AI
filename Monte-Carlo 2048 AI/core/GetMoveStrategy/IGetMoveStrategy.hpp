@@ -4,5 +4,5 @@
 
 struct IGetMoveStrategy {
 public:
-    [[nodiscard]] virtual Move GetMove() = 0;
+    [[nodiscard]] virtual Move GetMove(const Game&) = 0;
 };

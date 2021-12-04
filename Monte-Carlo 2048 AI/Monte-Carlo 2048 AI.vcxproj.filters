@@ -65,6 +65,15 @@
     <ClInclude Include="core\AddElementStrategy\Add2Or4Strategy.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="core\AI2048\AI.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AI2048\MonteCarloAI\MonteCarlo.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GetMoveStrategy\AIGetMoveStrategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

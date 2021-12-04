@@ -156,8 +156,11 @@
     <ClInclude Include="core\AddElementStrategy\Add2Or4Strategy.hpp" />
     <ClInclude Include="core\AddElementStrategy\Add2Strategy.hpp" />
     <ClInclude Include="core\AddElementStrategy\IAddElementStrategy.hpp" />
+    <ClInclude Include="core\AI2048\AI.hpp" />
+    <ClInclude Include="core\AI2048\MonteCarloAI\MonteCarlo.hpp" />
     <ClInclude Include="core\Game\Game.hpp" />
     <ClInclude Include="core\Game\Move.hpp" />
+    <ClInclude Include="core\GetMoveStrategy\AIGetMoveStrategy.hpp" />
     <ClInclude Include="core\GetMoveStrategy\IGetMoveStrategy.hpp" />
     <ClInclude Include="core\GetMoveStrategy\KeyboardGetMoveStrategy.hpp" />
     <ClInclude Include="include\argparse\argparse.hpp" />

@@ -179,15 +179,10 @@ void Game::UniteSimilarTiles(const Vector2i& direction) {
 }
 
 bool Game::CheckLose() {
-    std::clog << "Check lose start:...";
-    std::clog << "1";
-
     if (this->elementsCount < FIELD_SIZE * FIELD_SIZE) {
-        std::clog << "...check lose end!\n";
         return false;
     }
 
-    std::clog << "2";
     auto isMovable = false;
 
     for (auto i = 0; i < FIELD_SIZE - 1; ++i) {
@@ -201,14 +196,10 @@ bool Game::CheckLose() {
         }
     }
     outOffLoop:
-    std::clog << "3";
 
     if (isMovable) {
-        std::clog << "...check lose end!\n";
         return false;
     }
-
-    std::clog << "4";
 
     for (auto i = 0; i < FIELD_SIZE - 1; ++i) {
         if (this->field[i][FIELD_SIZE - 1] == this->field[i + 1][FIELD_SIZE - 1]
@@ -219,8 +210,5 @@ bool Game::CheckLose() {
         }
     }
 
-    std::clog << "5";
-
-    std::clog << "...check lose end!\n";
     return !isMovable;
 }

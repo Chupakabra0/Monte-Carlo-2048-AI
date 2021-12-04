@@ -9,7 +9,7 @@ public:
 
     }
 
-    [[nodiscard]] Move GetMove() override {
+    [[nodiscard]] Move GetMove(const Game&) override {
         auto gameMove = Move::NO;
         if (e.type == sf::Event::KeyReleased) {
             switch (e.key.code) {

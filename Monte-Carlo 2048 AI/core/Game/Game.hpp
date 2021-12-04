@@ -33,7 +33,7 @@ private:
     int score{};
     int elementsCount{};
 
-    std::unique_ptr<IAddElementStrategy> addElement;
+    std::shared_ptr<IAddElementStrategy> addElement;
 
     std::array<std::array<int, FIELD_SIZE>, FIELD_SIZE> field;
 
