@@ -24,11 +24,11 @@ public:
         auto bestMove  = moves.empty() ? Move::NO : moves.front();
         auto bestScore = static_cast<double>(game.GetScore());
 
-        std::clog << fmt::format("Get move started\n");
+        //std::clog << fmt::format("Get move started\n");
 
         for (auto i = 0; i < moves.size(); ++i) {
-            std::clog << std::string(35, '-') + "\n";
-            std::clog << fmt::format("Move: {}\n", MoveToString(moves[i]));
+            //std::clog << std::string(35, '-') + "\n";
+            //std::clog << fmt::format("Move: {}\n", MoveToString(moves[i]));
             auto tempScore = 0.0;
 
             for (auto j = 0; j < this->simulationsCount; ++j) {
@@ -52,19 +52,19 @@ public:
             }
 
             tempScore /= this->simulationsCount;
-            std::clog << fmt::format("Math. expect: {}\n", tempScore);
+            //std::clog << fmt::format("Math. expect: {}\n", tempScore);
 
             if (tempScore >= bestScore) {
                 bestScore = tempScore;
                 bestMove  = moves[i];
             }
 
-            std::clog << std::string(35, '-') + "\n";
+            //std::clog << std::string(35, '-') + "\n";
         }
 
-        std::clog << fmt::format("BEST MOVE: {} (score {})\n", MoveToString(bestMove), bestScore);
-        std::clog << fmt::format("Get move ended\n");
-        std::clog << std::string(35, '-') + "\n" << std::flush;
+        //std::clog << fmt::format("BEST MOVE: {} (score {})\n", MoveToString(bestMove), bestScore);
+        //std::clog << fmt::format("Get move ended\n");
+        //std::clog << std::string(35, '-') + "\n" << std::flush;
 
         return bestMove;
     }

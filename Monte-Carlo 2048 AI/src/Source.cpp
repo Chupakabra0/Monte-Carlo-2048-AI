@@ -6,18 +6,22 @@ int main(const int argc, char* argv[]) {
     auto argparser = make_unique<ArgumentParser>();
     argparser->add_argument("-s", "--simulations")
         .help("determines the number of games' simulations for each possible move")
-        .default_value(DEFAULT_SIMULATIONS_COUNT);
+        .default_value(DEFAULT_SIMULATIONS_COUNT)
+        .scan<'i', int>();
     argparser->add_argument("-l", "--length")
         .help("determines the maximum number of moves made during the simulation")
-        .default_value(DEFAULT_MAX_LENGTH_GAME);
+        .default_value(DEFAULT_MAX_LENGTH_GAME)
+        .scan<'i', int>();
 
     argparser->parse_args(argc, argv);
 
-    const auto simulations = strtol(argparser->get<std::string>("-s").c_str(), nullptr, 10);
-    const auto length      = strtol(argparser->get<std::string>("-l").c_str(), nullptr, 10);
+    const auto simulations = argparser->get<int>("-s");
+    const auto length      = argparser->get<int>("-l");
 
     auto window    = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
+    auto clock     = make_unique<Clock>();
     auto game      = make_unique<Game>();
+    auto aiTime    = 0.0f;
 
     //--------------------- GAME STUFF INIT --------------------//
 
@@ -28,6 +32,11 @@ int main(const int argc, char* argv[]) {
     
     //--------------------- GAME LOOP --------------------//
     while (window->isOpen()) {
+        //auto time = clock->getElapsedTime().asMicroseconds();
+        //clock->restart();
+        //time /= 2000.0f;
+        //aiTime += time;
+
         Event e;
         while (window->pollEvent(e)) {
             if (e.type == Event::Closed) {
@@ -35,14 +44,16 @@ int main(const int argc, char* argv[]) {
             }
 
             //auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove(*game);
+            //game->MakeMove(gameMove);
         }
 
-        if (game->IsPlaying()) {
-            //const auto gameMove = std::make_unique<AIGetMoveStrategy>(
-            //    std::make_shared<MonteCarloAI>(simulations, length)
-            //)->GetMove(*game);
+        if (game->IsPlaying() /*&& aiTime > 10.0f*/) {
+            const auto gameMove = std::make_unique<AIGetMoveStrategy>(
+                std::make_shared<MonteCarloAI>(simulations, length)
+            )->GetMove(*game);
 
-            //game->MakeMove(gameMove);
+            game->MakeMove(gameMove);
+            aiTime = 0.0f;
         }
 
         window->clear(Color(250, 248, 239));
