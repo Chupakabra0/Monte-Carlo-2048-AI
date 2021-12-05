@@ -38,11 +38,11 @@ int main(const int argc, char* argv[]) {
         }
 
         if (game->IsPlaying()) {
-            const auto gameMove = std::make_unique<AIGetMoveStrategy>(
-                std::make_shared<MonteCarloAI>(simulations, length)
-            )->GetMove(*game);
+            //const auto gameMove = std::make_unique<AIGetMoveStrategy>(
+            //    std::make_shared<MonteCarloAI>(simulations, length)
+            //)->GetMove(*game);
 
-            game->MakeMove(gameMove);
+            //game->MakeMove(gameMove);
         }
 
         window->clear(Color(250, 248, 239));

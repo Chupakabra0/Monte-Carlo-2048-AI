@@ -12,6 +12,13 @@ public:
         this->InitBools();
         this->InitScore();
         this->InitElements();
+
+        this->field[0][0] = 4096;
+        this->field[0][1] = 4096 * 2;
+        this->field[0][2] = 4096 * 2 * 2;
+        this->field[0][3] = 4096 * 2 * 2 * 2;
+        this->field[1][0] = 4096 * 2 * 2 * 2 * 2;
+        this->field[1][1] = 4096 * 2 * 2 * 2 * 2 * 2;
     }
 
     Game(const Game&) = default;
