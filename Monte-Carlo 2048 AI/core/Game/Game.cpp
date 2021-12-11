@@ -13,6 +13,10 @@ int Game::GetScore() const {
     return this->score;
 }
 
+std::array<std::array<int, FIELD_SIZE>, FIELD_SIZE> Game::GetField() const {
+    return this->field;
+}
+
 bool Game::IsPlaying() const {
     return this->isPlaying;
 }

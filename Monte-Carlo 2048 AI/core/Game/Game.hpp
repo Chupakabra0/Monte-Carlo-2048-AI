@@ -12,6 +12,28 @@ public:
         this->InitBools();
         this->InitScore();
         this->InitElements();
+
+        //this->field[0][0] = 4;
+        //this->field[0][1] = 8;
+        //this->field[0][2] = 16;
+        //this->field[0][3] = 32;
+
+        //this->field[1][0] = 512;
+        //this->field[1][1] = 256;
+        //this->field[1][2] = 128;
+        //this->field[1][3] = 64;
+
+        //this->field[2][0] = 1024;
+        //this->field[2][1] = 2048;
+        //this->field[2][2] = 4096;
+        //this->field[2][3] = 8192;
+
+        //this->field[3][0] = 131'072;
+        //this->field[3][1] = 131'072 / 2;
+        //this->field[3][2] = 131'072 / 2 / 2;
+        //this->field[3][3] = 131'072 / 2 / 2 / 2;
+
+        //this->score = 3'869'064;
     }
 
     Game(const Game&) = default;
@@ -20,6 +42,8 @@ public:
 
     [[nodiscard]] int GetElement(int row, int column) const;
     [[nodiscard]] int GetScore() const;
+
+    [[nodiscard]] std::array<std::array<int, FIELD_SIZE>, FIELD_SIZE> GetField() const;
 
     [[nodiscard]] bool IsPlaying() const;
     [[nodiscard]] bool IsChanged() const;

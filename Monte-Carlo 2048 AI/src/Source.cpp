@@ -23,6 +23,14 @@ int main(const int argc, char* argv[]) {
     auto game      = make_unique<Game>();
     auto aiTime    = 0.0f;
 
+    const auto imgIcon = std::make_unique<Image>();
+    imgIcon->loadFromFile("resources/icons/icon.png");
+    window->setIcon(imgIcon->getSize().x, imgIcon->getSize().y, imgIcon->getPixelsPtr());
+
+    std::vector<long long> times;
+
+    std::clog << fmt::format("k = {}\nl = {}\n", simulations, length);
+
     //--------------------- GAME STUFF INIT --------------------//
 
     auto tile = make_unique<RectangleShape>();
@@ -32,10 +40,10 @@ int main(const int argc, char* argv[]) {
     
     //--------------------- GAME LOOP --------------------//
     while (window->isOpen()) {
-        //auto time = clock->getElapsedTime().asMicroseconds();
-        //clock->restart();
-        //time /= 2000.0f;
-        //aiTime += time;
+        auto time = clock->getElapsedTime().asMicroseconds();
+        clock->restart();
+        time /= 1000.0f;
+        aiTime += time;
 
         Event e;
         while (window->pollEvent(e)) {
@@ -47,13 +55,17 @@ int main(const int argc, char* argv[]) {
             //game->MakeMove(gameMove);
         }
 
-        if (game->IsPlaying() /*&& aiTime > 10.0f*/) {
+        if (game->IsPlaying()) {
             const auto gameMove = std::make_unique<AIGetMoveStrategy>(
                 std::make_shared<MonteCarloAI>(simulations, length)
             )->GetMove(*game);
 
             game->MakeMove(gameMove);
             aiTime = 0.0f;
+            //std::clog << fmt::format("Time: {}\n", times.back());
+        }
+        else if (aiTime >= 200.0f) {
+            game = std::make_unique<Game>();
         }
 
         window->clear(Color(250, 248, 239));

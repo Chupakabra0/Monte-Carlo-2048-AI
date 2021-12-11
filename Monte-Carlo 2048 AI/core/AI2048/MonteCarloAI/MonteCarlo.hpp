@@ -7,6 +7,8 @@
 #include "const/Const.hpp"
 
 #include <fmt/format.h>
+#include <future>
+#include <chrono>
 
 class MonteCarloAI : public AI {
 public:
@@ -26,30 +28,37 @@ public:
 
         //std::clog << fmt::format("Get move started\n");
 
+        auto begin = std::chrono::steady_clock::now();
+
         for (auto i = 0; i < moves.size(); ++i) {
             //std::clog << std::string(35, '-') + "\n";
             //std::clog << fmt::format("Move: {}\n", MoveToString(moves[i]));
             auto tempScore = 0.0;
+            std::vector<std::future<void>> tasks;
 
             for (auto j = 0; j < this->simulationsCount; ++j) {
-                auto tempGame = game;
-                tempGame.MakeMove(moves[i]);
+                tasks.push_back(std::async(std::launch::async, [this, &game, &random, &i, &j, &moves, &tempScore]() {
+                    auto tempGame = game;
+                    tempGame.MakeMove(moves[i]);
 
-                for (auto k = 0; k < this->maxGameLength && tempGame.IsPlaying(); ) {
-                    const auto tempAvailiableMoves = this->GetAvailiableMoves(tempGame);
-                    const auto tempMove
-                        = tempAvailiableMoves[random->GetNextInt(tempAvailiableMoves.size())];
-                    
-                    tempGame.MakeMove(tempMove);
+                    for (auto k = 0; k < this->maxGameLength && tempGame.IsPlaying(); ) {
+                        const auto tempAvailiableMoves = this->GetAvailiableMoves(tempGame);
+                        const auto tempMove
+                            = tempAvailiableMoves[random->GetNextInt(tempAvailiableMoves.size())];
 
-                    if (tempGame.IsChanged()) {
-                        ++k;
+                        tempGame.MakeMove(tempMove);
+
+                        if (tempGame.IsChanged()) {
+                            ++k;
+                        }
                     }
-                }
 
-                //std::clog << fmt::format("Simulation #{}. Score: {}\n", j + 1, tempGame.GetScore());
-                tempScore += tempGame.GetScore();
+                    tempScore += tempGame.GetScore();
+                    //std::clog << fmt::format("Simulation #{}. Score: {}. Thread {}\n", j + 1, tempGame.GetScore(), std::hash<std::thread::id>{}(std::this_thread::get_id()));
+                }));
             }
+
+            std::for_each(tasks.begin(), tasks.end(), [](auto& task) { task.wait(); });
 
             tempScore /= this->simulationsCount;
             //std::clog << fmt::format("Math. expect: {}\n", tempScore);
@@ -61,6 +70,9 @@ public:
 
             //std::clog << std::string(35, '-') + "\n";
         }
+
+        auto end = std::chrono::steady_clock::now();
+        //std::clog << fmt::format("TIME: {} ms.\n", std::chrono::duration_cast<std::chrono::milliseconds>(end - begin).count());
 
         //std::clog << fmt::format("BEST MOVE: {} (score {})\n", MoveToString(bestMove), bestScore);
         //std::clog << fmt::format("Get move ended\n");

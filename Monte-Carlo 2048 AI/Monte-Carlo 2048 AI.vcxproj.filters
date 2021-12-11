@@ -74,8 +74,30 @@
     <ClInclude Include="core\GetMoveStrategy\AIGetMoveStrategy.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="resource.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\icons\icon.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

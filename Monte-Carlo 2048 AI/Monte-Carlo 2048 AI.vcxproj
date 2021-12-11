@@ -168,9 +168,19 @@
     <ClInclude Include="include\MainHeader.hpp" />
     <ClInclude Include="core\Random\Random.hpp" />
     <ClInclude Include="include\utils\Utils.hpp" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="resource.hpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.ico" />
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.png" />
+    <Image Include="resources\icons\icon.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
