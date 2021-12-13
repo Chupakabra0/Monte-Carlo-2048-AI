@@ -12,11 +12,16 @@ int main(const int argc, char* argv[]) {
         .help("determines the maximum number of moves made during the simulation")
         .default_value(DEFAULT_MAX_LENGTH_GAME)
         .scan<'i', int>();
+    argparser->add_argument("--ai")
+        .help("ai or human")
+        .default_value(DEFAULT_GAME_MODE)
+        .implicit_value(true);
 
     argparser->parse_args(argc, argv);
 
     const auto simulations = argparser->get<int>("-s");
     const auto length      = argparser->get<int>("-l");
+    const auto gameMode    = argparser->get<bool>("--ai");
 
     auto window    = make_unique<RenderWindow>(VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), "2048");
     auto clock     = make_unique<Clock>();
@@ -39,6 +44,7 @@ int main(const int argc, char* argv[]) {
     font->loadFromFile("resources/fonts/ClearSans-Regular.ttf");
     
     //--------------------- GAME LOOP --------------------//
+
     while (window->isOpen()) {
         auto time = clock->getElapsedTime().asMicroseconds();
         clock->restart();
@@ -51,21 +57,23 @@ int main(const int argc, char* argv[]) {
                 window->close();
             }
 
-            //auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove(*game);
-            //game->MakeMove(gameMove);
+            if (aiTime >= 200.0f && e.key.code == Keyboard::Space) {
+                game = std::make_unique<Game>();
+            }
+
+            if (!gameMode) {
+                auto gameMove = std::make_unique<KeyboardGetMoveStrategy>(e)->GetMove(*game);
+                game->MakeMove(gameMove);
+            }
         }
 
-        if (game->IsPlaying()) {
+        if (game->IsPlaying() && gameMode) {
             const auto gameMove = std::make_unique<AIGetMoveStrategy>(
                 std::make_shared<MonteCarloAI>(simulations, length)
             )->GetMove(*game);
 
             game->MakeMove(gameMove);
             aiTime = 0.0f;
-            //std::clog << fmt::format("Time: {}\n", times.back());
-        }
-        else if (aiTime >= 200.0f) {
-            game = std::make_unique<Game>();
         }
 
         window->clear(Color(250, 248, 239));

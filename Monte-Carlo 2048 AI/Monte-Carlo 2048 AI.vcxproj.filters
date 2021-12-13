@@ -94,10 +94,16 @@
     <Image Include="resources\icons\icon.ico">
       <Filter>Файлы ресурсов</Filter>
     </Image>
+    <Image Include="resources\icons\icon.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc">
       <Filter>Файлы ресурсов</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\ClearSans-Regular.ttf" />
   </ItemGroup>
 </Project>

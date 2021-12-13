@@ -178,9 +178,13 @@
     <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.ico" />
     <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.png" />
     <Image Include="resources\icons\icon.ico" />
+    <Image Include="resources\icons\icon.png" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Resource.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\ClearSans-Regular.ttf" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
