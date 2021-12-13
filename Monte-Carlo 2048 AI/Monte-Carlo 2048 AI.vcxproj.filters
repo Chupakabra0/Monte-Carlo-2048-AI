@@ -21,6 +21,9 @@
     <ClCompile Include="core\Game\Game.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="core\Random\Random.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\MainHeader.hpp">
@@ -35,8 +38,72 @@
     <ClInclude Include="core\Game\Game.hpp">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="core\Random\Random.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="include\utils\Utils.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AddElementStrategy\IAddElementStrategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AddElementStrategy\Add2Strategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AddElementStrategy\Add2048Strategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\Game\Move.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GetMoveStrategy\IGetMoveStrategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GetMoveStrategy\KeyboardGetMoveStrategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AddElementStrategy\Add2Or4Strategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AI2048\AI.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\AI2048\MonteCarloAI\MonteCarlo.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="core\GetMoveStrategy\AIGetMoveStrategy.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="C:\Users\Alexandr Safiyulin\Desktop\cb8c967c-4a78-4ffa-8506-cbac69746f4f.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\icons\icon.ico">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+    <Image Include="resources\icons\icon.png">
+      <Filter>Файлы ресурсов</Filter>
+    </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Resource.rc">
+      <Filter>Файлы ресурсов</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Font Include="resources\fonts\ClearSans-Regular.ttf" />
   </ItemGroup>
 </Project>
